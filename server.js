@@ -11,7 +11,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.post('/api/lunch', async (req, res) => {
+app.post('https://lunch-data.vercel.app/api/lunch', async (req, res) => {
     const data = await scrapeWebsite();
     res.send(data);
 });
