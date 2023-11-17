@@ -1,7 +1,7 @@
 import express, { json } from 'express';
 import scrapeWebsite from './lunch.js';
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(json());
 
@@ -11,7 +11,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.post('https://lunch-data.vercel.app/api/lunch', async (req, res) => {
+app.post('/api/lunch', async (req, res) => {
     const data = await scrapeWebsite();
     res.send(data);
 });
