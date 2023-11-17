@@ -1,4 +1,5 @@
-import { launch } from 'puppeteer';
+// import { launch } from 'puppeteer';
+const puppeteer = require('puppeteer-core');
 import chromium from 'chrome-aws-lambda';
 
 async function scrapeWebsite() {
