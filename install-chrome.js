@@ -1,8 +1,8 @@
-const puppeteer = require('puppeteer');
+import { install } from 'puppeteer';
 
 async function installChrome() {
   console.log('Installing Chrome...');
-  await puppeteer.install({ product: 'chrome' });
+  await install({ product: 'chrome' });
   console.log('Chrome installation complete.');
 }
 
