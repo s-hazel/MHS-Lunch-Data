@@ -7,7 +7,10 @@ const port = process.env.PORT || 3000;
 
 app.get('/', async (req, res) => {
     try {
-        const browser = await launch({ headless: "new" });
+        const browser = await puppeteer.launch({
+            executablePath: puppeteer.executablePath(),
+            headless: "new"
+          });
 
         const page = await browser.newPage();
         await page.goto('https://melroseschools.nutrislice.com/menu/melrose/breakfast', { waitUntil: 'networkidle0' });
