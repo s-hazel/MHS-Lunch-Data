@@ -37,16 +37,16 @@ app.get('/', async (req, res) => {
             console.log('Timeout waiting for .food-name-container or .no-data');
             await browser.close();
             res.send("No data available (Timeout)");
-            return; // Add return statement to exit the function
+            return;
         }
 
         // Check if .no-data exists
         const noDataElement = await page.$('.no-data');
         if (noDataElement) {
-            console.log('No data available');
+            console.log('No lunch today');
             await browser.close();
             res.send("No lunch today");
-            return; // Add return statement to exit the function
+            return;
         }
 
         // Continue if .no-data is not found
@@ -56,7 +56,7 @@ app.get('/', async (req, res) => {
             console.log('Food name not found');
             await browser.close();
             res.send("No data available");
-            return; // Add return statement to exit the function
+            return;
         }
 
         const textContent = await page.evaluate(el => el.textContent, foodNameContainer);
