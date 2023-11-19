@@ -1,4 +1,4 @@
-import { install } from 'puppeteer';
+import { install } from 'puppeteer-core/lib/install.js';
 
 async function installChrome() {
   console.log('Installing Chrome...');
