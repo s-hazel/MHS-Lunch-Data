@@ -1,6 +1,5 @@
-import * as puppeteer from 'puppeteer';
-const { launch } = puppeteer;
-import express from 'express';
+const puppeteer = require("puppeteer")
+const express = require("express")
 require("dotenv").config()
 
 const app = express();
@@ -34,7 +33,7 @@ app.get('/', async (req, res) => {
         } catch (error) {
             console.log('Timeout waiting for .food-name-container or .no-data');
             await browser.close();
-            res.send("data: No data available");
+            res.send("No data available (Timeout)");
             return; // Add return statement to exit the function
         }
 
@@ -43,7 +42,7 @@ app.get('/', async (req, res) => {
         if (noDataElement) {
             console.log('No data available');
             await browser.close();
-            res.send("data: No lunch today");
+            res.send("No lunch today");
             return; // Add return statement to exit the function
         }
 
@@ -53,7 +52,7 @@ app.get('/', async (req, res) => {
         if (!foodNameContainer) {
             console.log('Food name not found');
             await browser.close();
-            res.send("data: No data available");
+            res.send("No data available");
             return; // Add return statement to exit the function
         }
 
@@ -61,10 +60,10 @@ app.get('/', async (req, res) => {
 
         await browser.close();
 
-        res.send('data: ' + textContent);
+        res.send(textContent);
     } catch (error) {
         console.error('Error:', error);
-        res.status(500).send('Hey Internal Server Error');
+        res.status(500).send('Internal Server Error');
     }
 });
 
