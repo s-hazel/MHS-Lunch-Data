@@ -1,6 +1,5 @@
 {
-  "type": "module",
-  "scripts": {
+    "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
