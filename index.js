@@ -24,7 +24,7 @@ app.get('/', async (req, res) => {
         });
 
         const page = await browser.newPage();
-        await page.goto('https://melroseschools.nutrislice.com/menu/melrose/breakfast', { timeout: 60000 });
+        await page.goto('https://melroseschools.nutrislice.com/menu/melrose/breakfast', { waitUntil: 'networkidle0' });
 
         const button = await page.$('.primary');
         if (button) {
