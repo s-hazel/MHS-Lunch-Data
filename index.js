@@ -19,17 +19,26 @@ app.get('/', async (req, res) => {
                 "--no-zygote"
             ],
             executablePath: process.env.NODE_ENV === 'production'
-             ? process.env.PUPPETEER_EXECUTABLE_PATH
-             : puppeteer.executablePath()
+                ? process.env.PUPPETEER_EXECUTABLE_PATH
+                : puppeteer.executablePath()
         });
 
         const page = await browser.newPage();
         await page.goto('https://melroseschools.nutrislice.com/menu/melrose/breakfast', { waitUntil: 'networkidle0' });
 
-        const button = await page.$('.primary');
+        const timeout = 5000; // 5 seconds
+
+        const button = await Promise.race([
+            page.$('.primary'),
+            new Promise(resolve => setTimeout(resolve, timeout))
+        ]);
+
         if (button) {
             await button.click();
+        } else {
+            console.error('Button not found within the timeout period.');
         }
+
 
         try {
             // Wait for either .food-name-container or .no-data to appear
