@@ -1,7 +1,6 @@
 {
   "type": "module",
   "scripts": {
-    "preinstall": "node install-chrome.js",
     "start": "node index.js"
   },
   "dependencies": {
