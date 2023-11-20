@@ -11,7 +11,7 @@ const port = process.env.PORT || 3000;
 app.get('/', async (req, res) => {
     try {
         const browser = await puppeteer.launch({
-            headless: "new",
+            headless: false,
             args: [
                 "--disable-setuid-sandbox",
                 "--no-sandbox",
