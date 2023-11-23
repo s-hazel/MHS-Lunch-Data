@@ -30,19 +30,13 @@ app.get('/scrape', async (req, res) => {
         const page = await browser.newPage();
         await page.goto('https://melroseschools.nutrislice.com/menu/melrose/breakfast', { waitUntil: 'networkidle0' });
 
-        const timeout = 5000; // 5 seconds
-
-        const button = await Promise.race([
-            page.$('.primary'),
-            new Promise(resolve => setTimeout(resolve, timeout))
-        ]);
-
-        if (button) {
+        try {
+            const button = await page.waitForSelector('.primary');
             await button.click();
-        } else {
-            console.error('Button not found within the timeout period.');
+        } catch (error) {
+            console.error('Error:', error);
+            console.log("Bad button")
         }
-
 
         try {
             // Wait for either .food-name-container or .no-data to appear
