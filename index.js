@@ -27,6 +27,7 @@ app.get('/scrape', async (req, res) => {
         });
 
         const page = await browser.newPage();
+        await page.setDefaultTimeout(0);
         await page.goto('https://melroseschools.nutrislice.com/menu/melrose/breakfast', { waitUntil: 'networkidle0' });
 
         try {
