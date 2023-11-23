@@ -19,7 +19,6 @@ app.get('/scrape', async (req, res) => {
             args: [
                 "--disable-setuid-sandbox",
                 "--no-sandbox",
-                "--single-process",
                 "--no-zygote"
             ],
             executablePath: process.env.NODE_ENV === 'production'
