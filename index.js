@@ -8,10 +8,14 @@ const app = express();
 app.use(cors());
 const port = process.env.PORT || 3000;
 
-app.get('/', async (req, res) => {
+app.get("/", (req, res) => {
+    res.send("Render Puppeteer server is up and running!");
+});
+
+app.get('/scrape', async (req, res) => {
     try {
         const browser = await puppeteer.launch({
-            headless: false,
+            headless: "new",
             args: [
                 "--disable-setuid-sandbox",
                 "--no-sandbox",
