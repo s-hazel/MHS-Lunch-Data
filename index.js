@@ -8,17 +8,14 @@ const app = express();
 app.use(cors());
 const port = process.env.PORT || 3000;
 
-app.get("/", (req, res) => {
-    res.send("Render Puppeteer server is up and running!");
-});
-
-app.get('/scrape', async (req, res) => {
+app.get('/', async (req, res) => {
     try {
         const browser = await puppeteer.launch({
             headless: "new",
             args: [
                 "--disable-setuid-sandbox",
                 "--no-sandbox",
+                "--single-process",
                 "--no-zygote"
             ],
             executablePath: process.env.NODE_ENV === 'production'
@@ -27,7 +24,7 @@ app.get('/scrape', async (req, res) => {
         });
 
         const page = await browser.newPage();
-        await page.setDefaultTimeout(0);
+        page.setDefaultTimeout(0); // SUPER IMPORTANT
         await page.goto('https://melroseschools.nutrislice.com/menu/melrose/breakfast', { waitUntil: 'networkidle0' });
 
         try {
@@ -35,7 +32,6 @@ app.get('/scrape', async (req, res) => {
             await button.click();
         } catch (error) {
             console.error('Error:', error);
-            console.log("Bad button")
         }
 
         try {
