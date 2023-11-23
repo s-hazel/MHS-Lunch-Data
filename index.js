@@ -8,7 +8,7 @@ const app = express();
 app.use(cors());
 const port = process.env.PORT || 3000;
 
-app.get('/', async (req, res) => {
+app.get('/lunch', async (req, res) => {
     try {
         const browser = await puppeteer.launch({
             headless: "new",
